@@ -2,7 +2,7 @@ import Expo from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import AskQuestion from './Views/Login'
+import AskQuestion from './Views/ForgotPassword'
 
 export default class App extends React.Component {
     constructor() {
