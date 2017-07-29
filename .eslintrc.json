@@ -1,0 +1,26 @@
+{
+    "extends": "airbnb",
+    // We use 'babel-eslint' mainly for React Native Classes
+    "parser": "babel-eslint",
+    "ecmaFeatures": {
+        "classes": true
+    },
+    // We can add/overwrite custom rules here
+    "rules": {
+        // React Native has JSX in JS files
+        "react/jsx-filename-extension": [
+            "error",
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        // React Native includes images via require('../images/example.png')
+        "global-require": "off",
+        "indent": ["error", 4],
+        "react/jsx-indent": [2, 4],
+        "react/prop-types": [0]
+    }
+}
