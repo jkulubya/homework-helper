@@ -1,21 +1,24 @@
 import Expo from 'expo';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { observer } from 'mobx-react';
+import { addNavigationHelpers } from 'react-navigation';
+import RootNavigator from './Router/RootNavigator';
+import NavigationStore from './Store/NavigationStore';
 
-import AskQuestion from './Views/ForgotPassword'
-
+@observer
 export default class App extends React.Component {
-    constructor() {
-        super()
+    constructor(props, context) {
+        super(props, context);
         this.state = {
-            isReady: false
-        }
+            isReady: false,
+        };
+        this.store = new NavigationStore();
     }
 
     async componentWillMount() {
         await Expo.Font.loadAsync({
-            'Roboto': require('native-base/Fonts/Roboto.ttf'),
-            'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+            Roboto: require('native-base/Fonts/Roboto.ttf'),
+            Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
         });
         this.setState({ isReady: true });
     }
@@ -25,6 +28,10 @@ export default class App extends React.Component {
             return <Expo.AppLoading />;
         }
 
-        return <AskQuestion />
+        return (<RootNavigator navigation={addNavigationHelpers({
+            dispatch: this.store.dispatch,
+            state: this.store.state,
+        })}
+        />);
     }
 }
