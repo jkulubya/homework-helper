@@ -12,5 +12,6 @@ const styles = {
             marginLeft: 25,
         },
     },
-}
-export default styles 
+};
+
+export default styles;
