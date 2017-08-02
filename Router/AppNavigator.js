@@ -1,16 +1,24 @@
+import Expo from 'expo';
 import { StackNavigator } from 'react-navigation';
-import AskQuestion from '../Views/AskQuestion';
+import Home from '../Views/Home';
+import globalStyles from '../Globals/styles';
+
+const styles = {
+    header: {
+        paddingTop: Expo.Constants.statusBarHeight,
+        height: 56 + Expo.Constants.statusBarHeight,
+        backgroundColor: globalStyles.colors.primaryColor,
+    } };
 
 const AppNavigator = StackNavigator(
     {
-        Index: { screen: AskQuestion },
-        // Search: { screen: Search }
+        Index: { screen: Home },
     },
     {
         initialRouteName: 'Index',
-        navigationOptions: ({ navigation: { state } }) => ({
-            title: state.params && state.params.title,
-        }),
+        navigationOptions: {
+            headerStyle: styles.header,
+        },
     },
 );
 
