@@ -1,0 +1,37 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug in Exponent",
+            "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+            "type": "reactnative",
+            "request": "launch",
+            "platform": "exponent",
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/.vscode/.react"
+        },
+        {
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/server/bin/Debug/netcoreapp1.1/homework-helper-server.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/server",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://*:5000"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceRoot}/server/Views"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}

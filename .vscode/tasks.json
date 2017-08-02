@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}/homework-helper-server.csproj"
+                "${workspaceRoot}/server/homework-helper-server.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
