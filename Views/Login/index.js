@@ -58,23 +58,28 @@ export default class Login extends React.Component {
         };
         this.loginButtonPress = this.loginButtonPress.bind(this);
     }
+    // loginButtonPress() {
+    //     this.setState({ requestStatus: 'waiting' });
+    //     const payload = {
+    //         Username: this.state.Username,
+    //         Password: this.state.Password,
+    //     };
+    //     axios.post('http://10.0.2.2:5000/api/auth/login', payload)
+    //         .then((response) => {
+    //             this.setState({ jwt: response.data.auth_token, requestStatus: 'idle', succeeded: true });
+    //         })
+    //         .catch(() => {
+    //             this.setState({ requestStatus: 'idle', succeeded: false });
+    //         });
+    // }
     loginButtonPress() {
-        this.setState({ requestStatus: 'waiting' });
-        const payload = {
-            Username: this.state.Username,
-            Password: this.state.Password,
-        };
-        axios.post('http://10.0.2.2:5000/api/auth/login', payload)
-            .then((response) => {
-                this.setState({ jwt: response.data.auth_token, requestStatus: 'idle', succeeded: true });
-            })
-            .catch(() => {
-                this.setState({ requestStatus: 'idle', succeeded: false });
-            });
+        const { navigate } = this.props.navigation;
+        navigate('AppNavigator');
     }
+
     forgotPasswordButtonPress() {
-        // const { navigate } = this.props.navigation;
-        this.props.navigation.navigate('ForgotPassword');
+        const { navigate } = this.props.navigation;
+        navigate('ForgotPassword');
     }
     render() {
         return (
