@@ -7,7 +7,7 @@ const RootNavigator = StackNavigator(
     {
         Login: { screen: Login },
         ForgotPassword: { screen: ForgotPassword },
-        App: { screen: AppNavigator },
+        AppNavigator: { screen: AppNavigator },
     },
     {
         headerMode: 'none',

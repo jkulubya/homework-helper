@@ -1,9 +1,7 @@
 import Expo from 'expo';
 import React from 'react';
 import { observer } from 'mobx-react';
-import { addNavigationHelpers } from 'react-navigation';
 import RootNavigator from './Router/RootNavigator';
-import NavigationStore from './Store/NavigationStore';
 
 @observer
 export default class App extends React.Component {
@@ -12,7 +10,6 @@ export default class App extends React.Component {
         this.state = {
             isReady: false,
         };
-        this.store = new NavigationStore();
     }
 
     async componentWillMount() {
@@ -28,10 +25,6 @@ export default class App extends React.Component {
             return <Expo.AppLoading />;
         }
 
-        return (<RootNavigator navigation={addNavigationHelpers({
-            dispatch: this.store.dispatch,
-            state: this.store.state,
-        })}
-        />);
+        return <RootNavigator />;
     }
 }
