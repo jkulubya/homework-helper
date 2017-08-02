@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React from 'react';
 import { View } from 'react-native';
 import { Button, Container, Content, Input, Item, Text } from 'native-base';
+import Store from '../../Store';
 import globalStyles from '../../Globals/styles';
 
 const styles = {
@@ -52,29 +52,19 @@ export default class Login extends React.Component {
         this.state = {
             Username: '',
             Password: '',
-            requestStatus: 'idle',
-            jwt: '',
-            succeeded: false,
+            requestStatus: 'IDLE',
         };
         this.loginButtonPress = this.loginButtonPress.bind(this);
     }
-    // loginButtonPress() {
-    //     this.setState({ requestStatus: 'waiting' });
-    //     const payload = {
-    //         Username: this.state.Username,
-    //         Password: this.state.Password,
-    //     };
-    //     axios.post('http://10.0.2.2:5000/api/auth/login', payload)
-    //         .then((response) => {
-    //             this.setState({ jwt: response.data.auth_token, requestStatus: 'idle', succeeded: true });
-    //         })
-    //         .catch(() => {
-    //             this.setState({ requestStatus: 'idle', succeeded: false });
-    //         });
-    // }
+
     loginButtonPress() {
-        const { navigate } = this.props.navigation;
-        navigate('AppNavigator');
+        this.setState({ requestStatus: 'WAITING' });
+        Store.LoginUser(this.state.Username, this.state.Password);
+        this.setState({ requestStatus: 'IDLE' });
+
+        if (Store.User.IsLoggedIn) {
+            this.props.navigation.navigate('AppNavigator');
+        }
     }
 
     forgotPasswordButtonPress() {
