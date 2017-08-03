@@ -8,7 +8,7 @@ using homework_helper_server.Models;
 
 namespace homework_helper_server.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -22,5 +22,7 @@ namespace homework_helper_server.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Question> Questions { get; set; }
     }
 }

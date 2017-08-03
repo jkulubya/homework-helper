@@ -7,6 +7,7 @@ using homework_helper_server.Auth;
 using homework_helper_server.Helpers;
 using homework_helper_server.Models;
 using homework_helper_server.Models.AuthViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -17,12 +18,11 @@ namespace homework_helper_server.Controllers
     [Route("api/[controller]/[action]")]
     public class AuthController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IJwtFactory _jwtFactory;
-        private readonly JsonSerializerSettings _serializerSettings;
         private readonly JwtIssuerOptions _jwtOptions;
 
-        public AuthController(UserManager<ApplicationUser> userManager, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions)
+        public AuthController(UserManager<User> userManager, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions)
         {
             _userManager = userManager;
             _jwtFactory = jwtFactory;
@@ -30,6 +30,7 @@ namespace homework_helper_server.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
             if (!ModelState.IsValid)

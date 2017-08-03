@@ -15,6 +15,9 @@ using homework_helper_server.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using homework_helper_server.Auth;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace homework_helper_server
 {
@@ -61,10 +64,24 @@ namespace homework_helper_server
                 options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
             });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options => {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 8;
+                options.Cookies.ApplicationCookie.AutomaticChallenge = false;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            //Lockdown all routes
+            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
+            
             services.AddMvc();
 
             // Add application services.
@@ -96,25 +113,25 @@ namespace homework_helper_server
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
             var tokenValidationParameters = new TokenValidationParameters
             {
-            ValidateIssuer = true,
-            ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
+                ValidateIssuer = true,
+                ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
 
-            ValidateAudience = true,
-            ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
+                ValidateAudience = true,
+                ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
 
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = _signingKey,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = _signingKey,
 
-            RequireExpirationTime = false,
-            ValidateLifetime = false,
-            ClockSkew = TimeSpan.Zero
+                RequireExpirationTime = false,
+                ValidateLifetime = false,
+                ClockSkew = TimeSpan.Zero
             };
 
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
-            AutomaticAuthenticate = true,
-            AutomaticChallenge = true,
-            TokenValidationParameters = tokenValidationParameters
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters
             });
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
