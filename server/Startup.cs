@@ -82,7 +82,11 @@ namespace homework_helper_server
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
             
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(
+                    options => options.SerializerSettings.ReferenceLoopHandling =            
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
