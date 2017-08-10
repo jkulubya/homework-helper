@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace homework_helper_server.Models
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
     public class User : IdentityUser
     {
         public List<Question> QuestionsAsked { get; set; }
+        public List<Answer> Answers { get; set; }
+        public List<Vote> Votes { get; set; }
     }
 }

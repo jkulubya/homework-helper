@@ -12,7 +12,9 @@ namespace homework_helper_server.Models
         public string Description { get; set; }
         public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
         public string CreatorId { get; set; }
+        public int CategoryId { get; set; }
 
         public User Creator { get; set; }
+        public Category Category { get; set; }
     }
 }
