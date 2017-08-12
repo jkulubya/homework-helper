@@ -1,47 +1,48 @@
 import React from 'react';
-import { Container, Content, H1, H2, Text } from 'native-base';
-import globalStyles from '../../Globals/styles';
+import axios from 'axios';
+import { Container, Content } from 'native-base';
+import Answers from './Components/Answers';
+import Question from './Components/Question';
+import styles from './styles';
+import store from '../../Store';
 
-const styles = {
-    ...globalStyles,
-};
 
 export default class ViewQuestion extends React.Component {
+    constructor(props) {
+        super(props);
+        const question = this.props.navigation.state.params;
+        this.state = {
+            question,
+            answers: [],
+        };
+    }
+
+    componentDidMount() {
+        const header = `Bearer ${store.User.Token}`;
+
+        axios.all([
+            axios.get(`http://10.0.2.2:5000/api/questions/${this.state.question.id}`, {
+                headers: { Authorization: header },
+            }),
+            axios.get(`http://10.0.2.2:5000/api/questions/answers/${this.state.question.id}`, {
+                headers: { Authorization: header },
+            }),
+        ])
+        .then(axios.spread((question, answers) => {
+            this.setState({
+                question: question.data,
+                answers: answers.data,
+            });
+        }))
+        .catch(() => { this.setState({ networkError: true }); });
+    }
+
     render() {
         return (
             <Container style={styles.container}>
                 <Content>
-                    <H1>How do you complete the squares?</H1>
-                    <Text>jkulubya</Text>
-                    <Text>2 years ago</Text>
-                    <Text>
-                        Given a quadratic equation like a + b = c. How do I find the roots a and b?.
-                        And what is the rationale behind completeing the squares? Why does it work?
-                    </Text>
-                    <Text>Grade</Text>
-                    <Text>10</Text>
-                    <Text>Subject</Text>
-                    <Text>Mathematics</Text>
-                    <H2>23 Answers</H2>
-                    <Text>prinellm</Text>
-                    <Text>2 years ago</Text>
-                    <Text>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc a dignissim arcu, vel dictum ex. Nunc nec justo lorem...
-                    </Text>
-                    <Text />
-                    <Text>prinellm</Text>
-                    <Text>2 years ago</Text>
-                    <Text>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc a dignissim arcu, vel dictum ex. Nunc nec justo lorem...
-                    </Text>
-                    <Text>prinellm</Text>
-                    <Text>2 years ago</Text>
-                    <Text>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc a dignissim arcu, vel dictum ex. Nunc nec justo lorem...
-                    </Text>
+                    <Question question={this.state.question} />
+                    <Answers answers={this.state.answers} />
                 </Content>
             </Container>
         );

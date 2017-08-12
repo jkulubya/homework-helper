@@ -32,7 +32,7 @@ export default class QuestionRow extends Component {
         this.state = {
             id: props.id,
             title: props.title,
-            text: props.text,
+            description: props.description,
             author: props.author,
         };
         this.pressed = this.pressed.bind(this);
@@ -47,7 +47,7 @@ export default class QuestionRow extends Component {
             <TouchableOpacity style={styles.container} onPress={this.pressed} >
                 <Text style={styles.title}>{this.state.title}</Text>
                 <Text style={styles.author}>{this.state.author}</Text>
-                <Text style={styles.text}>{this.state.text}</Text>
+                <Text style={styles.description}>{this.state.description}</Text>
             </TouchableOpacity>
         );
     }
