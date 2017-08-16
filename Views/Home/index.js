@@ -2,8 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { Container, Content } from 'native-base';
 import { FlatList } from 'react-native';
+import ActionButton from 'react-native-action-button';
 import { observer } from 'mobx-react';
 import styles from './styles';
+import globals from '../../Globals/styles';
 import QuestionRow from './Components/QuestionRow';
 // import axios from '../../Globals/axios';
 import store from '../../Store';
@@ -41,6 +43,11 @@ export default class Home extends React.Component {
         navigate('Question', question);
     }
 
+    handleNewQuestionButtonClick() {
+        const { navigate } = this.props.navigation;
+        navigate('AskQuestion');
+    }
+
     render() {
         return (
             <Container style={styles.container}>
@@ -58,6 +65,10 @@ export default class Home extends React.Component {
                       />)}
                     />
                 </Content>
+                <ActionButton
+                  buttonColor={globals.colors.primaryColor}
+                  onPress={() => this.handleNewQuestionButtonClick()}
+                />
             </Container>
         );
     }

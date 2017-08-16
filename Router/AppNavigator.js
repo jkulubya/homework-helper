@@ -1,6 +1,7 @@
 import Expo from 'expo';
 import { StackNavigator } from 'react-navigation';
 import Home from '../Views/Home';
+import AskQuestion from '../Views/AskQuestion';
 import ViewQuestion from '../Views/ViewQuestion';
 import globalStyles from '../Globals/styles';
 
@@ -15,6 +16,7 @@ const AppNavigator = StackNavigator(
     {
         Index: { screen: Home },
         Question: { screen: ViewQuestion },
+        AskQuestion: { screen: AskQuestion },
     },
     {
         initialRouteName: 'Index',
