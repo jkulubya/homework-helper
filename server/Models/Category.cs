@@ -13,6 +13,7 @@ namespace homework_helper_server.Models
         public string Name { get; set; }
 
         public Category Parent { get; set; }
-        public List<Question> Categories { get; set; }
+        public List<Category> Children { get; set; }
+        public List<Question> Questions { get; set; }
     }
 }

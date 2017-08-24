@@ -152,6 +152,12 @@ namespace homework_helper_server.Controllers
             return Ok();
         }
 
+        [HttpGet("/api/categories")]
+        public async Task<IActionResult> Categories()
+        {
+            return Ok(_context.Categories.Include(c => c.Children).ToList());
+        }
+
         private Task<User> GetCurrentUser()
         {
             return _userManager.FindByIdAsync(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "id")?.Value);
