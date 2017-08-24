@@ -15,6 +15,7 @@ export default class ViewQuestion extends React.Component {
             question,
             answers: [],
         };
+        this.answerButtonPressed = this.answerButtonPressed.bind(this);
     }
 
     componentDidMount() {
@@ -37,11 +38,23 @@ export default class ViewQuestion extends React.Component {
         .catch(() => { this.setState({ networkError: true }); });
     }
 
+    answerButtonPressed() {
+        const { navigate } = this.props.navigation;
+        const data = {
+            id: this.state.question.id,
+            title: this.state.question.title,
+        };
+        navigate('PostAnswer', data);
+    }
+
     render() {
         return (
             <Container style={styles.container}>
                 <Content>
-                    <Question question={this.state.question} />
+                    <Question
+                      question={this.state.question}
+                      answerButtonPressed={this.answerButtonPressed}
+                    />
                     <Answers answers={this.state.answers} />
                 </Content>
             </Container>

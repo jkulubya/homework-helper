@@ -1,6 +1,6 @@
 const styles = {
     container: {
-        paddingTop: 50,
+        paddingTop: 30,
     },
     colors: {
         primaryColor: '#0d506c',

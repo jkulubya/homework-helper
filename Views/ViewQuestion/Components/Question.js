@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { H1, Text } from 'native-base';
+import { Button, H1, Text } from 'native-base';
 import globalStyles from '../../../Globals/styles';
 
 const styles = {
@@ -11,14 +11,18 @@ const styles = {
         color: globalStyles.colors.primaryColor,
         fontWeight: 'bold',
     },
+    submitButton: {
+        backgroundColor: globalStyles.colors.primaryColor,
+        marginBottom: 10,
+    },
 };
 
 const Question = props =>
     (
         <View style={styles.container}>
             <H1 style={styles.header}>{props.question.title}</H1>
-            <Text>jkulubya</Text>
-            <Text>2 years ago</Text>
+            <Text>{props.question.creator.userName}</Text>
+            {/* <Text>2 years ago</Text> */}
             <Text>
                 {props.question.description}
             </Text>
@@ -26,6 +30,13 @@ const Question = props =>
             <Text>10</Text>
             <Text>Subject</Text>
             <Text>Mathematics</Text>
+            <Button
+              block
+              style={styles.submitButton}
+              onPress={props.answerButtonPressed}
+            >
+                <Text>Post answer</Text>
+            </Button>
         </View>
     );
 

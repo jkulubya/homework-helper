@@ -3,6 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import Home from '../Views/Home';
 import AskQuestion from '../Views/AskQuestion';
 import ViewQuestion from '../Views/ViewQuestion';
+import PostAnswer from '../Views/PostAnswer';
 import globalStyles from '../Globals/styles';
 
 const styles = {
@@ -17,6 +18,7 @@ const AppNavigator = StackNavigator(
         Index: { screen: Home },
         Question: { screen: ViewQuestion },
         AskQuestion: { screen: AskQuestion },
+        PostAnswer: { screen: PostAnswer },
     },
     {
         initialRouteName: 'Index',

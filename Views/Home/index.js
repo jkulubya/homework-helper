@@ -57,10 +57,7 @@ export default class Home extends React.Component {
                       keyExtractor={item => item.id}
                       renderItem={({ item }) => (<QuestionRow
                         key={item.id}
-                        id={item.id}
-                        title={item.title}
-                        author={item.creatorId}
-                        description={item.description}
+                        question={item}
                         rowClicked={question => this.handleRowClick(question)}
                       />)}
                     />

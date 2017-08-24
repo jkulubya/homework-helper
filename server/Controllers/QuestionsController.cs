@@ -27,29 +27,38 @@ namespace homework_helper_server.Controllers
 
         public IActionResult Index()
         {
-            var questions = _context.Questions.Include(q => q.Category).ToList();
-            var result = new List<QuestionViewModel>();
+            var questions = _context.Questions.Include(q => q.Creator).Include(q => q.Category).Select(q => new QuestionViewModel {
+                Creator = new UserViewModel {
+                    Email = q.Creator.Email,
+                    Id = q.Creator.Id,
+                    UserName = q.Creator.UserName
+                },
+                Category = q.Category.Name,                
+                Description = q.Description,
+                Id = q.Id,
+                Title = q.Title
+            }).ToList();
 
-            foreach (var item in questions)
-            {
-                var vm = Mapper.Map<QuestionViewModel>(item);
-                vm.Category = item.Category.Name;
-                result.Add(vm);
-            }
-
-            return Ok(result);
+            return Ok(questions);
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var question = _context.Questions.Include(q => q.Creator).Include(q => q.Category).SingleOrDefault(q => q.Id == id);
+            var question = _context.Questions.Include(q => q.Creator).Include(q => q.Category).Where(q => q.Id == id).Select(q => new QuestionViewModel {
+                Creator = new UserViewModel {
+                    Email = q.Creator.Email,
+                    Id = q.Creator.Id,
+                    UserName = q.Creator.UserName
+                },
+                Category = q.Category.Name,                
+                Description = q.Description,
+                Id = q.Id,
+                Title = q.Title
+            }).SingleOrDefault();
             if(question == null) return NotFound();
 
-            var result = Mapper.Map<QuestionViewModel>(question);
-            result.Category = question.Category.Name;
-
-            return Ok(result);
+            return Ok(question);
         }
 
         [HttpPost("")]

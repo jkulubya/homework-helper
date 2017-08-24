@@ -9,6 +9,7 @@ namespace homework_helper_server.Models.QuestionViewModels
         public string Description { get; set; }
         public string Category { get; set; }
 
+        public UserViewModel Creator { get; set; }
         public List<AnswerViewModel> Answers { get; set; }
     }
 }

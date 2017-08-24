@@ -30,24 +30,21 @@ export default class QuestionRow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: props.id,
-            title: props.title,
-            description: props.description,
-            author: props.author,
+            question: props.question,
         };
         this.pressed = this.pressed.bind(this);
     }
 
     pressed() {
-        this.props.rowClicked(this.state);
+        this.props.rowClicked(this.state.question);
     }
 
     render() {
         return (
             <TouchableOpacity style={styles.container} onPress={this.pressed} >
-                <Text style={styles.title}>{this.state.title}</Text>
-                <Text style={styles.author}>{this.state.author}</Text>
-                <Text style={styles.description}>{this.state.description}</Text>
+                <Text style={styles.title}>{this.state.question.title}</Text>
+                <Text style={styles.author}>{this.state.question.author}</Text>
+                <Text style={styles.description}>{this.state.question.description}</Text>
             </TouchableOpacity>
         );
     }
