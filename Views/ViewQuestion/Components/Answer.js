@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Text } from 'native-base';
 
 const styles = {
@@ -26,15 +26,17 @@ const styles = {
     },
 };
 
-const Answer = props =>
-    (
-        <View style={styles.answer}>
-            <View style={styles.topMetadata}>
-                <Text style={styles.userName}>{props.answer.creator.userName}</Text>
-                <Text style={styles.date}>{moment(props.answer.date).fromNow()}</Text>
-            </View>
-            <Text>{props.answer.text}</Text>
+const Answer = props => (
+    <TouchableOpacity
+      style={styles.answer}
+      onPress={() => props.answerTapped(props.answer.id)}
+    >
+        <View style={styles.topMetadata}>
+            <Text style={styles.userName}>{props.answer.creator.userName}</Text>
+            <Text style={styles.date}>{moment(props.answer.date).fromNow()}</Text>
         </View>
-    );
+        <Text>{props.answer.text}</Text>
+    </TouchableOpacity>
+);
 
 export default Answer;

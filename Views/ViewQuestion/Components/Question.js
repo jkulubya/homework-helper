@@ -35,24 +35,23 @@ const styles = {
     },
 };
 
-const Question = props =>
-    (
-        <View style={styles.container}>
-            <H1 style={styles.header}>{props.question.title}</H1>
-            <View style={styles.topMetadata}>
-                <Text style={styles.userName}>{props.question.creator.userName}</Text>
-                <Text style={styles.date}>{moment(props.question.date).fromNow()}</Text>
-            </View>
-            <Text>{props.question.description}</Text>
-            <Category category={props.question.category} />
-            <Button
-              block
-              style={styles.submitButton}
-              onPress={props.answerButtonPressed}
-            >
-                <Text>Post answer</Text>
-            </Button>
+const Question = props => (
+    <View style={styles.container}>
+        <H1 style={styles.header}>{props.question.title}</H1>
+        <View style={styles.topMetadata}>
+            <Text style={styles.userName}>{props.question.creator.userName}</Text>
+            <Text style={styles.date}>{moment(props.question.date).fromNow()}</Text>
         </View>
+        <Text>{props.question.description}</Text>
+        <Category category={props.question.category} />
+        <Button
+          block
+          style={styles.submitButton}
+          onPress={props.answerButtonPressed}
+        >
+            <Text>Post answer</Text>
+        </Button>
+    </View>
     );
 
 export default Question;

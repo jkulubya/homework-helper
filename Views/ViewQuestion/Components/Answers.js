@@ -19,17 +19,16 @@ const styles = {
     },
 };
 
-const Answers = props =>
-    (
-        <View>
-            <H2 style={styles.header}>{`${props.answers.length} Answers`}</H2>
-            <FlatList
-              data={props.answers}
-              keyExtractor={item => item.id}
-              renderItem={({ item }) => <Answer answer={item} />}
-              style={styles.container}
-            />
-        </View>
+const Answers = props => (
+    <View>
+        <H2 style={styles.header}>{`${props.answers.length} answers`}</H2>
+        <FlatList
+          data={props.answers}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => <Answer answer={item} answerTapped={props.answerTapped} />}
+          style={styles.container}
+        />
+    </View>
     );
 
 export default Answers;

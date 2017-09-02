@@ -4,6 +4,7 @@ import Home from '../Views/Home';
 import AskQuestion from '../Views/AskQuestion';
 import ViewQuestion from '../Views/ViewQuestion';
 import PostAnswer from '../Views/PostAnswer';
+import ViewAnswer from '../Views/ViewAnswer';
 import globalStyles from '../Globals/styles';
 
 const styles = {
@@ -19,6 +20,7 @@ const AppNavigator = StackNavigator(
         Question: { screen: ViewQuestion },
         AskQuestion: { screen: AskQuestion },
         PostAnswer: { screen: PostAnswer },
+        ViewAnswer: { screen: ViewAnswer },
     },
     {
         initialRouteName: 'Index',
