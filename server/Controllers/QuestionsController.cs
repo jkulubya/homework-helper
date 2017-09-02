@@ -33,7 +33,8 @@ namespace homework_helper_server.Controllers
                     Id = q.Creator.Id,
                     UserName = q.Creator.UserName
                 },
-                Category = q.Category.Name,                
+                Category = q.Category.Name,
+                Date = q.Date,
                 Description = q.Description,
                 Id = q.Id,
                 Title = q.Title
@@ -51,7 +52,8 @@ namespace homework_helper_server.Controllers
                     Id = q.Creator.Id,
                     UserName = q.Creator.UserName
                 },
-                Category = q.Category.Name,                
+                Category = q.Category.Name,
+                Date = q.Date,
                 Description = q.Description,
                 Id = q.Id,
                 Title = q.Title

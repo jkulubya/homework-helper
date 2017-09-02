@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace homework_helper_server.Models.QuestionViewModels
@@ -8,6 +9,7 @@ namespace homework_helper_server.Models.QuestionViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
+        public DateTimeOffset Date { get; set; }
 
         public UserViewModel Creator { get; set; }
         public List<AnswerViewModel> Answers { get; set; }

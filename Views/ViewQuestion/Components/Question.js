@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button, H1, Text } from 'native-base';
+import moment from 'moment';
 import globalStyles from '../../../Globals/styles';
 
 const styles = {
@@ -14,6 +15,22 @@ const styles = {
     submitButton: {
         backgroundColor: globalStyles.colors.primaryColor,
         marginBottom: 10,
+        marginTop: 15,
+    },
+    topMetadata: {
+        display: 'flex',
+        flexDirection: 'row',
+        paddingBottom: 10,
+        paddingTop: 10,
+    },
+    userName: {
+        color: '#666',
+        flex: 1,
+    },
+    date: {
+        color: '#666',
+        flex: 1,
+        textAlign: 'right',
     },
 };
 
@@ -21,15 +38,11 @@ const Question = props =>
     (
         <View style={styles.container}>
             <H1 style={styles.header}>{props.question.title}</H1>
-            <Text>{props.question.creator.userName}</Text>
-            {/* <Text>2 years ago</Text> */}
-            <Text>
-                {props.question.description}
-            </Text>
-            <Text>Grade</Text>
-            <Text>10</Text>
-            <Text>Subject</Text>
-            <Text>Mathematics</Text>
+            <View style={styles.topMetadata}>
+                <Text style={styles.userName}>{props.question.creator.userName}</Text>
+                <Text style={styles.date}>{moment(props.question.date).fromNow()}</Text>
+            </View>
+            <Text>{props.question.description}</Text>
             <Button
               block
               style={styles.submitButton}
