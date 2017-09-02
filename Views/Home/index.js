@@ -1,14 +1,22 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, Content } from 'native-base';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import { observer } from 'mobx-react';
 import styles from './styles';
 import globals from '../../Globals/styles';
 import QuestionRow from './Components/QuestionRow';
-// import axios from '../../Globals/axios';
 import store from '../../Store';
+
+const separator = () => (
+    <View
+      style={{
+          height: 1,
+          backgroundColor: '#CED0CE',
+      }}
+    />
+);
 
 @observer
 export default class Home extends React.Component {
@@ -54,6 +62,7 @@ export default class Home extends React.Component {
                 <Content style={styles.content}>
                     <FlatList
                       data={this.state.questions}
+                      ItemSeparatorComponent={separator}
                       keyExtractor={item => item.id}
                       renderItem={({ item }) => (<QuestionRow
                         key={item.id}

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Button, H1, Text } from 'native-base';
 import moment from 'moment';
 import globalStyles from '../../../Globals/styles';
+import Category from '../../Components/Category';
 
 const styles = {
     container: {
@@ -43,6 +44,7 @@ const Question = props =>
                 <Text style={styles.date}>{moment(props.question.date).fromNow()}</Text>
             </View>
             <Text>{props.question.description}</Text>
+            <Category category={props.question.category} />
             <Button
               block
               style={styles.submitButton}

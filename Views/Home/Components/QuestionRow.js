@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
+import moment from 'moment';
+import Category from '../../Components/Category';
 
 const styles = {
     container: {
@@ -7,7 +9,10 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
-        padding: 15,
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     title: {
         alignSelf: 'stretch',
@@ -41,10 +46,14 @@ export default class QuestionRow extends Component {
 
     render() {
         return (
-            <TouchableOpacity style={styles.container} onPress={this.pressed} >
-                <Text style={styles.title}>{this.state.question.title}</Text>
+            <TouchableOpacity style={styles.container} onPress={this.pressed}>
+                <View style={styles.titleArea}>
+                    <Text style={styles.title}>{this.state.question.title}</Text>
+                    <Text style={styles.date}>{moment(this.state.question.date).fromNow()}</Text>
+                </View>
                 <Text style={styles.author}>{this.state.question.author}</Text>
                 <Text style={styles.description}>{this.state.question.description}</Text>
+                <Category category={this.state.question.category} />
             </TouchableOpacity>
         );
     }
