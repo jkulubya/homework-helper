@@ -119,6 +119,26 @@ namespace homework_helper_server.Controllers
             return Ok(answer);
         }
 
+        [HttpGet("/api/answers/{id}")]
+        public async Task<IActionResult> GetSingleAnswer(int id)
+        {
+            var answer = _context.Answers.Include(a => a.Creator).Where(a => a.Id == id)
+                            .Select(a => new AnswerViewModel {
+                                Creator = new UserViewModel {
+                                    Email = a.Creator.Email,
+                                    Id = a.Creator.Id,
+                                    UserName = a.Creator.UserName
+                                },
+                                CreatorId = a.CreatorId,
+                                Date = a.Date,
+                                Id = a.Id,
+                                Text = a.Text,
+                                QuestionId = a.QuestionId
+                            }).SingleOrDefault();
+            if(answer == null) return NotFound();
+            return Ok(answer);
+        }
+
         [HttpPost("upvote/{id}")]
         public async Task<IActionResult> Upvote(int id)
         {

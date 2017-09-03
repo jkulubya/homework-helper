@@ -48,7 +48,11 @@ export default class ViewQuestion extends React.Component {
 
     answerSelected = (id) => {
         const { navigate } = this.props.navigation;
-        navigate('ViewAnswer', id);
+        const data = {
+            id,
+            question: this.state.question,
+        };
+        navigate('ViewAnswer', data);
     }
 
     render() {
